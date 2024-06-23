@@ -1,0 +1,52 @@
+create database EbillManagement
+use EbillManagement
+
+CREATE TABLE customers (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    consumer_number  VARCHAR(13) NOT NULL unique ,
+    bill_number VARCHAR(5) NOT NULL unique,
+    title VARCHAR(5) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    mobile_code VARCHAR(5) NOT NULL,
+    mobile_number VARCHAR(10) NOT NULL,
+    userid VARCHAR(255) NOT NULL unique,	
+    password VARCHAR(255) NOT NULL
+);
+
+select * from customers
+delete from customers
+DESCRIBE customers;
+delete from customers where name='maddie'
+drop table customers
+
+
+create table admin(
+id BIGINT AUTO_INCREMENT PRIMARY KEY,
+email VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL
+)
+select * from admin
+
+CREATE TABLE bill (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    customer_email VARCHAR(255) NOT NULL,
+    amount DOUBLE NOT NULL,
+    status VARCHAR(50) NOT NULL
+);
+delete from bill
+drop table bill
+select * from bill
+
+CREATE INDEX idx_customers_email ON customers(email);
+CREATE TABLE complaint (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    discription TEXT NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    customer_email VARCHAR(255),
+    FOREIGN KEY (customer_email) REFERENCES customers(email)
+);
+delete from complaint
+drop table complaint
+select * from complaint
